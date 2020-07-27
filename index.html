@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <div id="el">
+            <form id="form">
+                <div>
+                    <span style="font-size: 20px;">Limits</span>
+                    <select id="limit" style="margin: 5px auto; font-size: 16px;">
+                        <option selected value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="15">15</option>
+                    </select>
+                </div>
+                <div>
+                    <span style="font-size: 20px;">Category</span>
+                    <select id="category" style="margin: 5px auto; font-size: 16px;">
+                        <option selected value="angular">angular</option>
+                        <option value="reactjs">reactjs</option>
+                        <option value="php">php</option>
+                    </select>
+                </div>
+            </form>
+            <div id="loader" style="margin: 15px auto; width: 200px;">LOADING...
+
+            </div>
+            <div id="resaultContainer">
+    
+            </div>
+            <div id="pagin">
+                <button id="prev" type="button">PREV</button>
+                <button id="next" type="button">NEXT</button>
+            </div>
+            
+
+        </div>
+        <script src="index.js"></script>
+    </body>
+</html>
