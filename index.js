@@ -214,8 +214,8 @@ const TOPPING = Symbol("topping");
 */
 class Hamburger {
   constructor(size, stuffing) {
-    if (arguments.length < 2 ) {
-      throw new HamburgerException("not all parameters are specified")
+    if (arguments.length !== 2 ) {
+      throw new HamburgerException("incorrect parameters")
     }
     if ((size === Hamburger.SIZE_SMALL) || (size === Hamburger.SIZE_LARGE)) {
       this[SIZE] = size;
