@@ -58,10 +58,9 @@ function getCount (obj, options = {}) {
   let count = 0
   for (let key in obj) {
     if ((obj[key] === undefined && options.skipUndefined === true) || (obj[key] === null && options.skipNull === true)) {
+      continue
     }
-    else {
-      count += 1
-    }
+    count += 1
   }
   return count
 }
@@ -218,10 +217,12 @@ class Hamburger {
     if (arguments.length < 2 ) {
       throw new HamburgerException("not all parameters are specified")
     }
-    if (!Object.values(Hamburger).includes(size) || size.propertysType !== "size") {
+    if ((size === Hamburger.SIZE_SMALL) || (size === Hamburger.SIZE_LARGE)) {
+      this[SIZE] = size;
+    }
+    else {
       throw new HamburgerException("invalid size")
     }
-    this[SIZE] = size;
     if (!Object.values(Hamburger).includes(stuffing) || stuffing.propertysType !== "stuffing") {
       throw new HamburgerException("invalid stuffing")
     }
@@ -230,18 +231,8 @@ class Hamburger {
   }
 }
 /* Размеры, виды начинок и добавок */
-Hamburger.SIZE_SMALL = {
-  "propertysType": "size",
-  "name": "small",
-  "price": "50",
-  "calories": "20"
-};
-Hamburger.SIZE_LARGE = {
-  "propertysType": "size",
-  "name": "large",
-  "price": "100",
-  "calories": "40"
-};
+Hamburger.SIZE_SMALL = "small";
+Hamburger.SIZE_LARGE = "large";
 Hamburger.STUFFING_CHEESE = {
   "propertysType": "stuffing",
   "name": "cheese",
@@ -334,7 +325,8 @@ Hamburger.prototype.getStuffing = function () {
 * @return {Number} Цена в тугриках
 */
 Hamburger.prototype.calculatePrice = function () {
-  let hamburgerPrice = +this[SIZE].price + +this[STUFFING].price;
+  let hamburgerPrice = (this[SIZE] === "large" ? 100 : 50);
+  hamburgerPrice += +this[STUFFING].price;
   for (let {price} of this[TOPPING]) {
     hamburgerPrice += +price
   }
@@ -345,7 +337,8 @@ Hamburger.prototype.calculatePrice = function () {
 * @return {Number} Калорийность в калориях
 */
 Hamburger.prototype.calculateCalories = function () {
-  let hamburgerCalories = +this[SIZE].calories + +this[STUFFING].calories;
+  let hamburgerCalories = (this[SIZE] === "large" ? 40 : 20);
+  hamburgerCalories += +this[STUFFING].calories;
   for (let {calories} of this[TOPPING]) {
     hamburgerCalories += +calories
   }
